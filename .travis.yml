@@ -10,4 +10,5 @@ script:
   - export ANSIBLE_ROLES_PATH="../"
   - ansible-playbook -i tests/inventory --syntax-check tests/test.yml
   - ansible-playbook -i tests/inventory --connection=local --sudo -vvvv tests/test.yml
-
+notifications:
+  email: false
