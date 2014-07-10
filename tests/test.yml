@@ -1,0 +1,5 @@
+---
+- hosts: all
+  sudo: True
+  roles:
+    - ansible-logrotate
