@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/nickhammond/ansible-logrotate.svg?branch=master)](https://travis-ci.org/nickhammond/ansible-logrotate)
+
 Role Name
 ========
 
