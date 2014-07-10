@@ -1,0 +1,13 @@
+---
+galaxy_info:
+  author: Nick Hammond
+  description: Role to configure logrotate scripts
+  license: license (GPLv2, CC-BY, etc)
+  min_ansible_version: 1.5
+  - name: Ubuntu
+    versions:
+    - lucid
+    - precise
+  categories:
+  - system
+dependencies: []
