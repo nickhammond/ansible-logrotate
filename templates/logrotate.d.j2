@@ -2,4 +2,9 @@
   {% for option in item.options -%}
   {{ option }}
   {% endfor %}
+  {%- for name, script in item.scripts.iteritems() -%}
+  {{ name }}
+    {{ script }}
+  endscript
+  {%- endfor %}
 }
