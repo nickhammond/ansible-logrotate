@@ -1,5 +1,14 @@
 "{{ item.path }}" {
+  {% if item.options is defined -%}
   {% for option in item.options -%}
   {{ option }}
-  {% endfor %}
+  {% endfor -%}
+  {% endif %}
+  {%- if item.scripts is defined -%}
+  {%- for name, script in item.scripts.iteritems() -%}
+  {{ name }}
+    {{ script }}
+  endscript
+  {% endfor -%}
+  {% endif -%}
 }

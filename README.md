@@ -13,11 +13,12 @@ None
 Role Variables
 --------------
 
-**logrotate_scripts**: A list of logrotate scripts and the directives to use for the rotation. 
+**logrotate_scripts**: A list of logrotate scripts and the directives to use for the rotation.
 
 * name - The name of the script that goes into /etc/logrotate.d/
 * path - Path to point logrotate to for the log rotation
 * options - List of directives for logrotate, view the logrotate man page for specifics
+* scripts - List of scripts for logrotate (see Example below)
 
 ```
 logrotate_scripts:
@@ -40,7 +41,7 @@ None
 Example Playbook
 -------------------------
 
-Setting up logrotate for additional Nginx logs
+Setting up logrotate for additional Nginx logs, with postrotate script.
 
 ```
 logrotate_scripts:
@@ -54,6 +55,9 @@ logrotate_scripts:
       - compress
       - delaycompress
       - copytruncate
+    scripts:
+      - postrotate: "[ -s /run/nginx.pid ] && kill USR1 `cat /run/nginx.pid`"
+
 ```
 
 License
