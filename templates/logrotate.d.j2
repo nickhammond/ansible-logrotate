@@ -1,3 +1,5 @@
+# {{ ansible_managed }}
+
 "{{ item.path }}" {
   {% if item.options is defined -%}
   {% for option in item.options -%}
