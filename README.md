@@ -18,7 +18,7 @@ Role Variables
 * name - The name of the script that goes into /etc/logrotate.d/
 * path - Path to point logrotate to for the log rotation
 * options - List of directives for logrotate, view the logrotate man page for specifics
-* scripts - List of scripts for logrotate (see Example below)
+* scripts - Dict of scripts for logrotate (see Example below)
 
 ```
 logrotate_scripts:
@@ -56,7 +56,7 @@ logrotate_scripts:
       - delaycompress
       - copytruncate
     scripts:
-      - postrotate: "[ -s /run/nginx.pid ] && kill USR1 `cat /run/nginx.pid`"
+      postrotate: "[ -s /run/nginx.pid ] && kill USR1 `cat /run/nginx.pid`"
 
 ```
 
