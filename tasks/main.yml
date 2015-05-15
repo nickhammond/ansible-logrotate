@@ -8,3 +8,15 @@
     dest: /etc/logrotate.d/{{ item.name }}
   with_items: logrotate_scripts
   when: logrotate_scripts is defined
+
+- name: nickhammond.logrotate | Change logrotate execution schedule
+  cron:
+    name: "Run logrotate on a non-default schedule"
+    job: "/usr/sbin/logrotate /etc/logrotate.conf"
+    month: "{{ logrotate_cron.month|default('*') }}"
+    day: "{{ logrotate_cron.day|default('*') }}"
+    hour: "{{ logrotate_cron.hour|default('*') }}"
+    minute: "{{ logrotate_cron.minute|default('*') }}"
+    weekday: "{{ logrotate_cron.weekday|default('*') }}"
+    state: present
+  when: logrotate_cron is defined
