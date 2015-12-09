@@ -6,5 +6,6 @@
   template:
     src: logrotate.d.j2
     dest: /etc/logrotate.d/{{ item.name }}
+    mode: u=rw,g=r,o=r
   with_items: logrotate_scripts
   when: logrotate_scripts is defined
