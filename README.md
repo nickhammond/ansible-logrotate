@@ -41,23 +41,23 @@ None
 Example Playbook
 -------------------------
 
-Setting up logrotate for additional Nginx logs, with postrotate script.
+Setting up logrotate for additional Nginx logs, with postrotate script (assuming this role is located in `roles/logrotate`).
 
 ```
-logrotate_scripts:
-  - name: nginx
-    path: /var/log/nginx/*.log
-    options:
-      - weekly
-      - size 25M
-      - rotate 7
-      - missingok
-      - compress
-      - delaycompress
-      - copytruncate
-    scripts:
-      postrotate: "[ -s /run/nginx.pid ] && kill -USR1 `cat /run/nginx.pid`"
-
+- role: logrotate
+  logrotate_scripts:
+    - name: nginx
+      path: /var/log/nginx/*.log
+      options:
+        - weekly
+        - size 25M
+        - rotate 7
+        - missingok
+        - compress
+        - delaycompress
+        - copytruncate
+      scripts:
+        postrotate: "[ -s /run/nginx.pid ] && kill -USR1 `cat /run/nginx.pid`"
 ```
 
 License
