@@ -1,17 +1,15 @@
-[![Build Status](https://travis-ci.org/nickhammond/ansible-logrotate.svg?branch=master)](https://travis-ci.org/nickhammond/ansible-logrotate)
+# logrotate
 
-Role Name
-========
+[![Build Status](https://travis-ci.org/nickhammond/logrotate.svg?branch=master)](https://travis-ci.org/nickhammond/logrotate)
 
-Installs logrotate and provides an easy way to setup additional logrotate scripts by specifying a list of directives.
+Installs logrotate and provides an easy way to setup additional logrotate scripts by
+specifying a list of directives.
 
-Requirements
-------------
+## Requirements
 
 None
 
-Role Variables
---------------
+## Role Variables
 
 **logrotate_scripts**: A list of logrotate scripts and the directives to use for the rotation.
 
@@ -33,13 +31,11 @@ logrotate_scripts:
       - copytruncate
 ```
 
-Dependencies
-------------
+## Dependencies
 
 None
 
-Example Playbook
--------------------------
+## Example Playbook
 
 Setting up logrotate for additional Nginx logs, with postrotate script.
 
@@ -60,12 +56,15 @@ logrotate_scripts:
 
 ```
 
-License
--------
+## License
 
-BSD
+[BSD](https://raw.githubusercontent.com/nickhammond/logrotate/master/LICENSE)
 
-Author Information
-------------------
+## Author Information
 
-Find [Nick Hammond]( http://www.nickhammond.com ) on [Twitter](http://twitter.com/nickhammond).
+* [nickhammond](https://github.com/nickhammond) | [www](http://www.nickhammond.com) | [twitter](http://twitter.com/nickhammond).
+* [bigjust](https://github.com/bigjust)
+* [steenzout](https://github.com/steenzout)
+* [jeancornic](https://github.com/jeancornic)
+* [duhast](https://github.com/duhast)
+* [kagux](https://github.com/kagux)
