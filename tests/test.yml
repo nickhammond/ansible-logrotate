@@ -16,3 +16,7 @@
           path: /var/log/nginx/scripts.log
           scripts:
             postrotate: "echo test"
+
+    - role: ansible-logrotate
+      logrotate_cron:
+        minute: "*/5"

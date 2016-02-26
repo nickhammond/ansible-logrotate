@@ -33,6 +33,15 @@ logrotate_scripts:
       - copytruncate
 ```
 
+**logrotate_cron**: A cron map that, when defined, will change how often logrotate is executed.
+
+* Time unit keys map directly to the cron module.
+
+```
+logrotate_cron:
+  minute: "*/5"
+```
+
 Dependencies
 ------------
 
