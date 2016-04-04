@@ -10,6 +10,9 @@ galaxy_info:
     - lucid
     - precise
     - trusty
+   - name: EL
+     versions:
+     - 7
   categories:
   - system
 dependencies: []
