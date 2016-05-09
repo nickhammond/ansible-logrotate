@@ -1,5 +1,5 @@
 # {{ ansible_managed }}
-{% if item.path is iterable -%}
+{% if item.path is iterable and not item.path is string -%}
 {{ item.path | join(" ") }} {
 {%- else -%}
 "{{ item.path }}" {
