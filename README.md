@@ -1,6 +1,6 @@
 # logrotate
 
-[![Build Status](https://travis-ci.org/nickhammond/logrotate.svg?branch=master)](https://travis-ci.org/nickhammond/logrotate)
+![Build Status](https://travis-ci.org/nickhammond/ansible-logrotate.svg?branch=master)
 
 Installs logrotate and provides an easy way to setup additional logrotate scripts by
 specifying a list of directives.
@@ -62,7 +62,7 @@ Setting up logrotate for additional Nginx logs, with postrotate script (assuming
 
 ## Author Information
 
-* [nickhammond](https://github.com/nickhammond) | [www](http://www.nickhammond.com) | [twitter](http://twitter.com/nickhammond).
+* [nickhammond](https://github.com/nickhammond) | [www](http://www.nickhammond.com) | [twitter](http://twitter.com/nickhammond)
 * [bigjust](https://github.com/bigjust)
 * [steenzout](https://github.com/steenzout)
 * [jeancornic](https://github.com/jeancornic)
