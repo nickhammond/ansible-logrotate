@@ -18,6 +18,9 @@ None
 * options - List of directives for logrotate, view the logrotate man page for specifics
 * scripts - Dict of scripts for logrotate (see Example below)
 
+
+**logrotate_become**: Set it to true if you need to run the role with admin privilegies (false by default).
+
 ```
 logrotate_scripts:
   - name: rails
