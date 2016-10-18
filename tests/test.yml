@@ -1,6 +1,7 @@
 ---
 - hosts: all
-  become: True
+  vars:
+    logrotate_become: true
   roles:
     - ansible-logrotate
     - role: ansible-logrotate
