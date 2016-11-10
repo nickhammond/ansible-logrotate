@@ -5,14 +5,25 @@ galaxy_info:
   license: BSD
   min_ansible_version: 1.9
   platforms:
-  - name: Ubuntu
-    versions:
-    - lucid
-    - precise
-    - trusty
   - name: EL
     versions:
-    - 7
+      - 6
+      - 7
+  - name: Fedora
+    versions:
+      - 24
+      - 23
+  - name: Ubuntu
+    versions:
+      - lucid
+      - precise
+      - trusty
+      - xenial
+      - yakkety
+  - name: Debian
+    versions:
+      - jessie
+      - wheezy
   categories:
   - system
 dependencies: []
