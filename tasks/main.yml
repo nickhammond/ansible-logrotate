@@ -28,7 +28,6 @@
     # For examples of what the regex matches, see: https://regex101.com/r/l0e9eQ/5
     regexp: '(?![^{]*})(((?<=\n\n)|^){{ item[1] }}\s{(.|\n)*?\n\s*}|((?<=\n)|^){{ item[1] }}\s)'
     replace: ""
-    backup: yes
   with_nested:
     - "{{ all_configurations.files | map(attribute='path') | difference(logrotate_scripts | map(attribute='path')) | list }}"
     - "{{ logrotate_scripts | map(attribute='path') | list }}"

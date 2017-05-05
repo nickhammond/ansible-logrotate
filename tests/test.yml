@@ -16,3 +16,12 @@
           path: /var/log/nginx/scripts.log
           scripts:
             postrotate: "echo test"
+
+    - role: ansible-logrotate
+      logrotate_conf_dir: "{{ lookup('env', 'TEST_OVERRIDE_CONF_DIR') }}"
+      logrotate_replace_old_configurations: true
+      logrotate_scripts:
+        - name: override
+          path: /log
+          options:
+            - daily
