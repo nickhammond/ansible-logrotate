@@ -10,4 +10,27 @@
     src: logrotate.d.j2
     dest: "{{ logrotate_conf_dir }}{{ item.name }}"
   with_items: "{{ logrotate_scripts }}"
+  register: setup_configurations
   when: logrotate_scripts is defined
+
+- name: Find all log rotate configurations
+  find:
+    paths: "{{ logrotate_conf_dir }}"
+    # Not matching backups, which end in ~
+    patterns: ".*[^~]$"
+    use_regex: True
+    follow: True
+  register: all_configurations
+  when: logrotate_replace_old_configurations and logrotate_scripts is defined
+
+- name: Remove conflicting path configurations previously defined in non-Ansible managed files
+  replace:
+    path: "{{ item[0] }}"
+    # For examples of what the regex matches, see: https://regex101.com/r/l0e9eQ/5
+    regexp: '(?![^{]*})(((?<=\n\n)|^){{ item[1] }}\s{(.|\n)*?\n\s*}|((?<=\n)|^){{ item[1] }}\s)'
+    replace: ""
+    backup: yes
+  with_nested:
+    - "{{ all_configurations.files | map(attribute='path') | difference(setup_configurations.results | map(attribute='path')) }}"
+    - "{{ logrotate_scripts | map(attribute='path') | list }}"
+  when: logrotate_replace_old_configurations and logrotate_scripts is defined
