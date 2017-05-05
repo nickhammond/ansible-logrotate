@@ -10,7 +10,6 @@
     src: logrotate.d.j2
     dest: "{{ logrotate_conf_dir }}{{ item.name }}"
   with_items: "{{ logrotate_scripts }}"
-  register: setup_configurations
   when: logrotate_scripts is defined
 
 - name: Find all log rotate configurations
@@ -31,6 +30,6 @@
     replace: ""
     backup: yes
   with_nested:
-    - "{{ all_configurations.files | map(attribute='path') | difference(setup_configurations.results | map(attribute='path')) }}"
+    - "{{ all_configurations.files | map(attribute='path') | difference(logrotate_scripts | map(attribute='path')) | list }}"
     - "{{ logrotate_scripts | map(attribute='path') | list }}"
   when: logrotate_replace_old_configurations and logrotate_scripts is defined
