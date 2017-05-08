@@ -11,25 +11,22 @@ None
 
 ## Role Variables
 
-**logrotate_scripts**: A list of logrotate scripts and the directives to use for the rotation.
+* **logrotate_conf_dir**: String defining the location of the directory containing the logrotate configuration files.
 
-* name - The name of the script that goes into /etc/logrotate.d/
-* path - Path to point logrotate to for the log rotation
-* options - List of directives for logrotate, view the logrotate man page for specifics
-* scripts - Dict of scripts for logrotate (see Example below)
+* **logrotate_scripts**: A list of logrotate scripts and the directives to use for the rotation.
+    * name - The name of the script that goes into /etc/logrotate.d/
+    * path - Path to point logrotate to for the log rotation
+    * options - List of directives for logrotate, view the logrotate man page for specifics
+    * scripts - Dict of scripts for logrotate (see Example below)
+    
+* **logrotate_replace_old_configurations**: Boolean defining whether to remove conflicting path configurations defined 
+in configuration files not managed by this role.
+<br><br>
+E.g. if you define a configuration for managing `/var/log/kern.log`, you may find that this has done before in 
+`/etc/logrotate.d/rsyslog` (along with configurations for a number of other log paths). Setting this variable to `true` 
+in this case will remove the old configuration from `/var/log/kern.log`, whilst leaving the other configurations in 
+`/var/log/rsyslog` unaltered.
 
-```
-logrotate_scripts:
-  - name: rails
-    path: "/srv/current/log/*.log"
-    options:
-      - weekly
-      - size 25M
-      - missingok
-      - compress
-      - delaycompress
-      - copytruncate
-```
 
 ## Dependencies
 
