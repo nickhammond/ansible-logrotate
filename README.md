@@ -37,23 +37,35 @@ None
 
 ## Example Playbook
 
-Setting up logrotate for additional Nginx logs, with postrotate script (assuming this role is located in `roles/logrotate`).
+Setting up logrotate for additional Nginx logs, with postrotate script.
 
 ```
-- role: logrotate
-  logrotate_scripts:
-    - name: nginx
-      path: /var/log/nginx/*.log
-      options:
-        - weekly
-        - size 25M
-        - rotate 7
-        - missingok
-        - compress
-        - delaycompress
-        - copytruncate
-      scripts:
-        postrotate: "[ -s /run/nginx.pid ] && kill -USR1 `cat /run/nginx.pid`"
+- hosts: all
+  vars:
+    logrotate_scripts:
+      - name: nginx-options
+        path: /var/log/nginx/options.log
+        options:
+          - daily
+          - weekly
+          - size 25M
+          - rotate 7
+          - missingok
+          - compress
+          - delaycompress
+          - copytruncate
+
+      - name: nginx-scripts
+        path: /var/log/nginx/scripts.log
+        options:
+          - daily
+          - weekly
+          - size 25M
+        scripts:
+          postrotate: "echo test"
+
+  roles:
+    - ansible-logrotate
 ```
 
 ## Testing locally
