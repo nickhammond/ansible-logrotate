@@ -15,3 +15,10 @@
 
   roles:
     - ansible-logrotate
+
+  tasks:
+    - name: Verify logrotate config check passes
+      shell: logrotate -d "{{ logrotate_conf_dir }}{{ item.name }}"
+      with_items: "{{ logrotate_scripts }}"
+      register: logrotate_tests
+      failed_when: "'error' in logrotate_tests.stderr"
