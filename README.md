@@ -56,6 +56,17 @@ Setting up logrotate for additional Nginx logs, with postrotate script (assuming
         postrotate: "[ -s /run/nginx.pid ] && kill -USR1 `cat /run/nginx.pid`"
 ```
 
+## Testing locally
+
+This role is already configured to run on travis CI within a test playbook but it's useful to be able to run and debug a role locally which can be done via Vagrant and the `ansible_local` provisioner.
+
+To run the test playbook locally within a Vagrant virtual machine:
+
+```
+cd tests
+vagrant up --provision
+```
+
 ## License
 
 [BSD](https://raw.githubusercontent.com/nickhammond/logrotate/master/LICENSE)
