@@ -16,3 +16,12 @@
           path: /var/log/nginx/scripts.log
           scripts:
             postrotate: "echo test"
+
+    - role: ansible-logrotate
+      logrotate_scripts:
+        - name: some-stuff
+          path:
+            - /var/log/apt/history.log
+            - /var/log/apt/term.log
+          options:
+            - daily

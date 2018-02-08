@@ -1,6 +1,9 @@
 # {{ ansible_managed }}
-
+{% if item.path is iterable and not item.path is string -%}
+{{ item.path | join(" ") }} {
+{%- else -%}
 "{{ item.path }}" {
+{%- endif %}
   {% if item.options is defined -%}
   {% for option in item.options -%}
   {{ option }}
