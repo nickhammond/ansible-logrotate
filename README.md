@@ -1,6 +1,6 @@
 # logrotate
 
-![Build Status](https://travis-ci.org/nickhammond/ansible-logrotate.svg?branch=master)
+[![Build Status](https://travis-ci.org/nickhammond/ansible-logrotate.svg?branch=master)](https://travis-ci.org/nickhammond/ansible-logrotate)
 
 Installs logrotate and provides an easy way to setup additional logrotate scripts by
 specifying a list of directives.
@@ -53,23 +53,46 @@ None
 
 ## Example Playbook
 
-Setting up logrotate for additional Nginx logs, with postrotate script (assuming this role is located in `roles/logrotate`).
+Setting up logrotate for additional Nginx logs, with postrotate script.
 
 ```
-- role: logrotate
-  logrotate_scripts:
-    - name: nginx
-      path: /var/log/nginx/*.log
-      options:
-        - weekly
-        - size 25M
-        - rotate 7
-        - missingok
-        - compress
-        - delaycompress
-        - copytruncate
-      scripts:
-        postrotate: "[ -s /run/nginx.pid ] && kill -USR1 `cat /run/nginx.pid`"
+- hosts: all
+  vars:
+    logrotate_scripts:
+      - name: nginx-options
+        path: /var/log/nginx/options.log
+        options:
+          - daily
+          - weekly
+          - size 25M
+          - rotate 7
+          - missingok
+          - compress
+          - delaycompress
+          - copytruncate
+
+      - name: nginx-scripts
+        path: /var/log/nginx/scripts.log
+        options:
+          - daily
+          - weekly
+          - size 25M
+        scripts:
+          postrotate: "echo test"
+
+  roles:
+    - ansible-logrotate
+```
+
+## Testing locally
+
+This role is already configured to run on travis CI within a test playbook but it's useful to be able to run and debug a role locally which can be done via Vagrant and the `ansible_local` provisioner.
+
+To run the test playbook locally within a Vagrant virtual machine:
+
+```
+cd tests
+vagrant up --provision
 ```
 
 ## License
