@@ -1,14 +1,30 @@
 ---
+
+dist: trusty
+
 language: python
+
 python: "2.7"
+
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq python-apt python-pycurl
+
 install:
   - pip install ansible
+
+before_script:
+  - export TEST_OVERRIDE_CONF_DIR=${TRAVIS_BUILD_DIR}/override-configuration
+  - mkdir "${TEST_OVERRIDE_CONF_DIR}"
+  - printf "/log\n/other\n{\n\tdaily\n}" > ${TEST_OVERRIDE_CONF_DIR}/existing-1
+  - printf "/other\n{\n\t/log\n}" > ${TEST_OVERRIDE_CONF_DIR}/existing-2
+
 script:
   - "printf '[defaults]\nroles_path = ../' > ansible.cfg"
   - ansible-playbook -i tests/inventory --syntax-check tests/test.yml
   - ansible-playbook -i tests/inventory --connection=local --become -vvvv tests/test.yml
+  - echo "$(printf '/other\n{\n\tdaily\n}' | md5sum | cut -d ' ' -f 1) ${TEST_OVERRIDE_CONF_DIR}/existing-1" | md5sum -c -
+  - echo "$(printf '/other\n{\n\t/log\n}' | md5sum | cut -d ' ' -f 1) ${TEST_OVERRIDE_CONF_DIR}/existing-2" | md5sum -c -
+
 notifications:
   email: false

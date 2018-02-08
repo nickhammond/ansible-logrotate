@@ -11,3 +11,24 @@
     dest: "{{ logrotate_conf_dir }}{{ item.name }}"
   with_items: "{{ logrotate_scripts }}"
   when: logrotate_scripts is defined
+
+- name: Find all log rotate configurations
+  find:
+    paths: "{{ logrotate_conf_dir }}"
+    # Not matching backups, which end in ~
+    patterns: ".*[^~]$"
+    use_regex: True
+    follow: True
+  register: all_configurations
+  when: logrotate_replace_old_configurations and logrotate_scripts is defined
+
+- name: Remove conflicting path configurations defined in files not managed by this role
+  replace:
+    path: "{{ item[0] }}"
+    # For examples of what the regex matches, see: https://regex101.com/r/l0e9eQ/5
+    regexp: '(?![^{]*})(((?<=\n\n)|^){{ item[1] }}\s{(.|\n)*?\n\s*}|((?<=\n)|^){{ item[1] }}\s)'
+    replace: ""
+  with_nested:
+    - "{{ all_configurations.files | map(attribute='path') | difference(logrotate_scripts | map(attribute='path')) | list }}"
+    - "{{ logrotate_scripts | map(attribute='path') | list }}"
+  when: logrotate_replace_old_configurations and logrotate_scripts is defined
