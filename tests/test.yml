@@ -1,16 +1,21 @@
 ---
 - hosts: all
   become: True
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=yes
+      changed_when: False
+      when: ansible_os_family == 'Debian'
   roles:
-    - ansible-logrotate
-    - role: ansible-logrotate
+    - role_under_test
+    - role: role_under_test
       logrotate_scripts:
         - name: nginx-options
           path: /var/log/nginx/options.log
           options:
             - daily
 
-    - role: ansible-logrotate
+    - role: role_under_test
       logrotate_scripts:
         - name: nginx-scripts
           path: /var/log/nginx/scripts.log
