@@ -4,6 +4,7 @@
     name: logrotate
     state: present
   when: logrotate_scripts is defined and logrotate_scripts|length > 0
+  become: true
 
 - name: nickhammond.logrotate | Setup logrotate.d scripts
   template:
@@ -11,3 +12,4 @@
     dest: "{{ logrotate_conf_dir }}{{ item.name }}"
   with_items: "{{ logrotate_scripts }}"
   when: logrotate_scripts is defined
+  become: true
