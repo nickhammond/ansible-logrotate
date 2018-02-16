@@ -15,6 +15,7 @@ None
 
 * name - The name of the script that goes into /etc/logrotate.d/
 * path - Path to point logrotate to for the log rotation
+* paths - A list of paths to point logrotate to for the log rotation.
 * options - List of directives for logrotate, view the logrotate man page for specifics
 * scripts - Dict of scripts for logrotate (see Example below)
 
@@ -22,6 +23,21 @@ None
 logrotate_scripts:
   - name: rails
     path: "/srv/current/log/*.log"
+    options:
+      - weekly
+      - size 25M
+      - missingok
+      - compress
+      - delaycompress
+      - copytruncate
+```
+
+```
+logrotate_scripts:
+  - name: rails
+    paths:
+        - "/srv/current/scare.log"
+        - "/srv/current/hide.log"
     options:
       - weekly
       - size 25M

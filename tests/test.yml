@@ -13,6 +13,11 @@
         scripts:
           postrotate: "echo test"
 
+      - name: multiple-paths
+        paths:
+          - /var/log/nginx/options.log
+          - /var/log/nginx/scripts.log
+
   roles:
     - ansible-logrotate
 
