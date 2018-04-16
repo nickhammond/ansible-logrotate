@@ -17,6 +17,7 @@ None
 * path - Path to point logrotate to for the log rotation
 * paths - A list of paths to point logrotate to for the log rotation.
 * options - List of directives for logrotate, view the logrotate man page for specifics
+* globaloptions - List of global directives for logrotate, view the logrotate man page for specifics
 * scripts - Dict of scripts for logrotate (see Example below)
 
 ```
@@ -45,6 +46,18 @@ logrotate_scripts:
       - compress
       - delaycompress
       - copytruncate
+```
+
+### Global Options
+```
+logrotate_scripts:
+  - name: 000-global
+    globaloptions:
+      - daily
+      - dateext
+      - rotate 365
+      - compress
+      - delaycompress
 ```
 
 ## Dependencies
