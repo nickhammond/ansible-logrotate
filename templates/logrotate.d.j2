@@ -1,4 +1,9 @@
 # {{ ansible_managed }}
+{% if item.globaloptions is defined -%}
+{% for globaloption in item.globaloptions -%}
+{{ globaloption }}
+{% endfor -%}
+{% endif %}
 
 {% if 'path' in item %}
 "{{ item.path }}"
