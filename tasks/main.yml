@@ -1,9 +1,23 @@
 ---
+
 - name: nickhammond.logrotate | Install logrotate
   package:
     name: logrotate
     state: present
   when: logrotate_scripts is defined and logrotate_scripts|length > 0
+
+- name: Check for logrotate daily cron entry
+  stat:
+    path: "{{ logrotate_cron_daily_location }}"
+  register: daily_cron_entry
+  when: logrotate_support_hourly_rotates
+
+- name: Move logrotate cron entry from daily to hourly
+  command: "mv '{{ logrotate_cron_daily_location }}' '{{ logrotate_cron_hourly_location }}'"
+  args:
+    creates: "{{ logrotate_cron_hourly_location }}"
+    removes: "{{ logrotate_cron_daily_location }}"
+  when: logrotate_support_hourly_rotates and daily_cron_entry.stat.exists
 
 - name: nickhammond.logrotate | Setup logrotate.d scripts
   template:

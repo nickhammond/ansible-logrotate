@@ -1,2 +1,5 @@
+---
+
 logrotate_conf_dir: "/etc/logrotate.d/"
 logrotate_scripts: []
+logrotate_support_hourly_rotates: true
