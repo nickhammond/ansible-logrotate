@@ -13,6 +13,7 @@
       file:
         path: '/var/log/nginx/{{ item }}'
         state: 'touch'
+      changed_when: false
       loop:
         - 'options.log'
         - 'scripts.log'
