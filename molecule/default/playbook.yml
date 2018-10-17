@@ -1,0 +1,42 @@
+---
+- name: Converge
+  hosts: all
+
+  tasks:
+    - name: molecule playbook | create nginx dir
+      file:
+        path: '/var/log/nginx'
+        state: 'directory'
+      become: true
+
+    - name: molecule playbook | create nginx log files
+      file:
+        path: '/var/log/nginx/{{ item }}'
+        state: 'touch'
+      loop:
+        - 'options.log'
+        - 'scripts.log'
+
+  roles:
+    - role: ansible-logrotate
+      vars:
+        logrotate_scripts:
+          - name: nginx-options
+            path: /var/log/nginx/options.log
+            options:
+              - daily
+              - weekly
+              - size 25M
+              - rotate 7
+              - missingok
+              - compress
+              - delaycompress
+              - copytruncate
+          - name: nginx-scripts
+            path: /var/log/nginx/scripts.log
+            options:
+              - daily
+              - weekly
+              - size 25M
+            scripts:
+              postrotate: "echo test"

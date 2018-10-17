@@ -1,2 +1,4 @@
 tests/.vagrant
 test.retry
+*.pyc
+__pycache__
