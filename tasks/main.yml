@@ -3,7 +3,7 @@
   package:
     name: logrotate
     state: present
-  when: logrotate_scripts is defined and logrotate_scripts|length > 0
+  when: logrotate_install_package
 
 - name: nickhammond.logrotate | Setup logrotate.d scripts
   template:
