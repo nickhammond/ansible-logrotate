@@ -21,7 +21,7 @@ provisioner:
   lint:
     name: ansible-lint
 scenario:
-  name: travisci
+  name: default
 verifier:
   name: testinfra
   lint:
