@@ -5,10 +5,11 @@ python: "2.7"
 services:
   - docker
 before_install:
-  #- sudo apt-get update -qq
-  #- sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
   - docker pull retr0h/molecule:latest
-  - docker run --rm -it -v $(pwd):/tmp/$(basename "${PWD}") -v /var/run/docker.sock:/var/run/docker.sock -w /tmp/$(basename "${PWD}") retr0h/molecule:latest sudo molecule test
+  - >
+    docker run --rm -it -v $(pwd):/tmp/$(basename "${PWD}")
+    -v /var/run/docker.sock:/var/run/docker.sock -w /tmp/$(basename "${PWD}")
+    retr0h/molecule:latest sudo molecule test
     # install:
     #   - pip install ansible
     # script:
