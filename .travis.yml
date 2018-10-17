@@ -1,9 +1,12 @@
 ---
+sudo: required
 language: python
 python: "2.7"
+services:
+  - docker
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -qq python-apt python-pycurl
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
 install:
   - pip install ansible
 script:
