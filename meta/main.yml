@@ -7,12 +7,13 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - lucid
-        - precise
+        - bionic
+        - xenial
         - trusty
-    - name: EL
+    - name: CentOS
       versions:
         - 7
+        - 6
   galaxy_tags:
     - system
 dependencies: []

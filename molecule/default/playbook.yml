@@ -26,7 +26,6 @@
             path: /var/log/nginx/options.log
             options:
               - daily
-              - spam
               - weekly
               - size 25M
               - rotate 7
@@ -38,7 +37,6 @@
             path: /var/log/nginx/scripts.log
             options:
               - daily
-              - egg
               - weekly
               - size 25M
             scripts:
