@@ -10,13 +10,13 @@ env:
     - GIT_REPO_NAME: ansible-logrotate
   matrix:
     - MOLECULE_DISTRO_IMAGE: ubuntu:18.04
-    - MOLECULE_DISTRO_IMAGE: ubuntu:16.04
-    - MOLECULE_DISTRO_IMAGE: ubuntu:14.04
-    - MOLECULE_DISTRO_IMAGE: centos:7
-    - MOLECULE_DISTRO_IMAGE: centos:6
-    - MOLECULE_DISTRO_IMAGE: fedora:29
-    - MOLECULE_DISTRO_IMAGE: debian:9
-    - MOLECULE_DISTRO_IMAGE: debian:8
+    # - MOLECULE_DISTRO_IMAGE: ubuntu:16.04
+    # - MOLECULE_DISTRO_IMAGE: ubuntu:14.04
+    # - MOLECULE_DISTRO_IMAGE: centos:7
+    # - MOLECULE_DISTRO_IMAGE: centos:6
+    # - MOLECULE_DISTRO_IMAGE: fedora:29
+    # - MOLECULE_DISTRO_IMAGE: debian:9
+    # - MOLECULE_DISTRO_IMAGE: debian:8
 
 install:
   # Install test dependencies.

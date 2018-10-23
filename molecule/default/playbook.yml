@@ -19,7 +19,7 @@
         - 'scripts.log'
 
   roles:
-    - role: ansible-logrotate
+    - role: nickhammond.logrotate
       vars:
         logrotate_scripts:
           - name: nginx-options
