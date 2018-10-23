@@ -1,0 +1,25 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: instance
+    image: "${MOLECULE_DISTRO_IMAGE:-ubuntu:14.04}"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privlidged: true
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  playbook:
+    converge: playbook.yml
+scenario:
+  name: default
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

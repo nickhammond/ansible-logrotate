@@ -86,13 +86,12 @@ Setting up logrotate for additional Nginx logs, with postrotate script.
 
 ## Testing locally
 
-This role is already configured to run on travis CI within a test playbook but it's useful to be able to run and debug a role locally which can be done via Vagrant and the `ansible_local` provisioner.
+This role is already configured to run on travis CI within a test playbook but it's useful to be able to run and debug a role locally which can be done via molecule and docker provisioner.
 
-To run the test playbook locally within a Vagrant virtual machine:
+To run the test locally, [install molecule](https://molecule.readthedocs.io/en/latest/installation.html), then run
 
 ```
-cd tests
-vagrant up --provision
+molecule test
 ```
 
 ## License

@@ -5,14 +5,15 @@ galaxy_info:
   license: BSD
   min_ansible_version: 1.9
   platforms:
-  - name: Ubuntu
-    versions:
-    - lucid
-    - precise
-    - trusty
-  - name: EL
-    versions:
-    - 7
-  categories:
-  - system
+    - name: Ubuntu
+      versions:
+        - bionic
+        - xenial
+        - trusty
+    - name: CentOS
+      versions:
+        - 7
+        - 6
+  galaxy_tags:
+    - system
 dependencies: []
