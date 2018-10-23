@@ -1,16 +1,35 @@
 ---
-sudo: false
 language: python
 python: "2.7"
-services:
-  - docker
-before_install:
-  - docker pull retr0h/molecule:latest
-install: true
+services: docker
+
+env:
+  global:
+    - ROLE_NAME: logrotate
+    - GALAXY_AUTHOR: nickhammond
+    - GIT_REPO_NAME: ansible-logrotate
+  matrix:
+    - MOLECULE_DISTRO_IMAGE: ubuntu:18.04
+    - MOLECULE_DISTRO_IMAGE: ubuntu:16.04
+    - MOLECULE_DISTRO_IMAGE: ubuntu:14.04
+    - MOLECULE_DISTRO_IMAGE: centos:7
+    - MOLECULE_DISTRO_IMAGE: centos:6
+    - MOLECULE_DISTRO_IMAGE: fedora:29
+    - MOLECULE_DISTRO_IMAGE: debian:9
+    - MOLECULE_DISTRO_IMAGE: debian:8
+
+install:
+  # Install test dependencies.
+  - pip install molecule docker
+
+before_script:
+  # Use actual Ansible Galaxy role name for the project directory.
+  - cd ../
+  - mv $GIT_REPO_NAME $GALAXY_AUTHOR.$ROLE_NAME
+  - cd $GALAXY_AUTHOR.$ROLE_NAME
+
 script:
-  - >
-    docker run --rm -it -v $(pwd):/tmp/$(basename "${PWD}")
-    -v /var/run/docker.sock:/var/run/docker.sock -w /tmp/$(basename "${PWD}")
-    retr0h/molecule:latest sudo molecule test
+  # Run tests.
+  - molecule test
 notifications:
   email: false
